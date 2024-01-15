@@ -93,12 +93,12 @@ class UserController extends Controller
             return response()->json([
                 'status' => 'success',
                 'message' => '4 Digit OTP Code has been send to your email !'
-            ],200);
+            ]);
         }
         else{
             return response()->json([
                 'status' => 'failed',
-                'message' => 'unauthorized'
+                'message' => 'email not found'
             ]);
         }
 
@@ -118,7 +118,7 @@ class UserController extends Controller
                 'status' => "success",
                 'message' => "OTP verified successfully",
                 
-            ],200)->cookie('token', $token, 60*60*12);
+            ],200)->cookie('token', $token, 60*60);
 
         } else{
             return response()->json([

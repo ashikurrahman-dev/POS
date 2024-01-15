@@ -26,7 +26,7 @@
           if(password.length===0){
               errorToast('Password is required')
           }
-          else if(cpassword.length===0){
+          else if(cpassword.length===0){ 
               errorToast('Confirm Password is required')
           }
           else if(password!==cpassword){

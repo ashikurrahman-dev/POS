@@ -80,18 +80,12 @@
         if(res.status === 200 && res.data['status'] === 'success'){
             successToast(res.data['message']);
             setTimeout(function () {
-                window.location.href = '/dashboard';
+                window.location.href = '/registration';
             }, 1000);
         } else{
             errorToast(res.data['message']);
         }
     }
-    
-
-
-
-
-
 
 
   }
