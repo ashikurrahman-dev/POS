@@ -337,17 +337,19 @@
             else if (InvoiceItemList.length === 0) {
                 errorToast('Invoice Item is required')
             }
-            else {
-                showLoader();
-                let res = await axios.post('/invoice-create', Data);
-                hideLoader();
+            else{
+                // console.log("hello");
 
+                showLoader();
+                let res=await axios.post("/invoice-create",Data)
+                hideLoader();
+                
                 if(res.data===1){
-                    window.location.href = "/invoicePage";
-                    successToast('Invoice Created')
+                    window.location.href='/invoicePage'
+                    successToast("Invoice Created");
                 }
                 else{
-                    errorToast('Something went wrong')
+                    errorToast("Something Went Wrong")
                 }
             }
         }

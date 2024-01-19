@@ -23,9 +23,11 @@ class CustomerController extends Controller
     }
 
     function CustomerList(Request $request){
+        // dd($request);
 
         $user_id=$request->header('id');
         return Customer::where('user_id',$user_id)->get();
+
 
     }
 
