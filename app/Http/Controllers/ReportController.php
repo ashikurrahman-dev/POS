@@ -13,7 +13,6 @@ class ReportController extends Controller
         return view('pages.dashboard.report-page');
     }
 
-
     function SalesReport(Request $request){
         $user_id = $request->header('id');
         $FormDate = date('Y-m-d', strtotime($request->FormDate));
@@ -59,5 +58,4 @@ class ReportController extends Controller
 
         return $pdf->download('invoice.pdf');
     }
-
 }

@@ -15,13 +15,19 @@ return new class extends Migration
             $table->id();
 
             $table->unsignedBigInteger('invoice_id');
-            $table->foreign('invoice_id')->references('id')->on('invoices')->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreign('invoice_id')->references('id')->on('invoices')
+                ->cascadeOnUpdate()
+                ->restrictOnDelete();
 
             $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products')->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreign('product_id')->references('id')->on('products')
+                ->cascadeOnUpdate()
+                ->restrictOnDelete();
 
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreign('user_id')->references('id')->on('users')
+                ->cascadeOnUpdate()
+                ->restrictOnDelete();
 
             $table->string('qty');
             $table->string('sale_price');

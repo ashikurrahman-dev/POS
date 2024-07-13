@@ -16,7 +16,6 @@ class DashboardController extends Controller
     }
 
     function Summary(Request $request){
-        // dd($request->all());
         $user_id = $request->header('id');
 
         $product= Product::where('user_id',$user_id)->count();
