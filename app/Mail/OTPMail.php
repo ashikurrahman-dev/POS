@@ -22,7 +22,7 @@ class OTPMail extends Mailable
     public function __construct($otp)
     {
         $this->otp = $otp;
-        
+
     }
 
     /**

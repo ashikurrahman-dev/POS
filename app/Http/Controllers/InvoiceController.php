@@ -12,28 +12,31 @@ use Illuminate\Support\Facades\DB;
 class InvoiceController extends Controller
 {
 
-    function SalePage(){
+    function SalePage()
+    {
         return view('pages.dashboard.sale-page');
     }
 
 
-    function InvoicePage(){
+    function InvoicePage()
+    {
         return view('pages.dashboard.invoice-page');
     }
 
 
-    function invoiceCreate(Request $request){
+    function invoiceCreate(Request $request)
+    {
 
         DB::beginTransaction();
         try {
             $user_id = $request->header('id');
-            
+
             $total = $request->input('total');
             $discount = $request->input('discount');
             $vat = $request->input('vat');
             $payable = $request->input('payable');
             $customer_id = $request->input('customer_id');
-            
+
             $invoice = Invoice::create([
 
                 'total' => $total,
@@ -42,13 +45,12 @@ class InvoiceController extends Controller
                 'payable' => $payable,
                 'customer_id' => $customer_id,
                 'user_id' => $user_id
-
             ]);
-           
+
             $invoice_id = $invoice->id;
             $products = $request->input('products');
-            
-            foreach($products as $product){
+
+            foreach ($products as $product) {
                 InvoiceProduct::create([
                     'invoice_id' => $invoice_id,
                     'user_id' => $user_id,
@@ -56,7 +58,8 @@ class InvoiceController extends Controller
                     'qty' => $product['qty'],
                     'sale_price' => $product['sale_price']
                 ]);
-            };
+            }
+            ;
 
             DB::commit();
             return 1;
@@ -64,16 +67,18 @@ class InvoiceController extends Controller
         } catch (Exception $e) {
             DB::rollBack();
             return 0;
-        }        
+        }
     }
 
-    function invoiceSelect(Request $request){
+    function invoiceSelect(Request $request)
+    {
         $user_id = $request->header('id');
-        
+
         return Invoice::where('user_id', $user_id)->with('customer')->get();
     }
 
-    function InvoiceDetails(Request $request){
+    function InvoiceDetails(Request $request)
+    {
         $user_id = $request->header('id');
         $customerDetails = Customer::where('user_id', $user_id)
             ->where('id', $request->input('cus_id'))
@@ -93,7 +98,8 @@ class InvoiceController extends Controller
         ];
     }
 
-    function invoiceDelete(Request $request){
+    function invoiceDelete(Request $request)
+    {
         DB::beginTransaction();
 
         try {
@@ -107,8 +113,7 @@ class InvoiceController extends Controller
 
             DB::commit();
             return 1;
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             return 0;
         }

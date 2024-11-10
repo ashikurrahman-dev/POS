@@ -8,12 +8,14 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class ReportController extends Controller
 {
-    
-    function ReportPage(){
+
+    function ReportPage()
+    {
         return view('pages.dashboard.report-page');
     }
 
-    function SalesReport(Request $request){
+    function SalesReport(Request $request)
+    {
         $user_id = $request->header('id');
         $FormDate = date('Y-m-d', strtotime($request->FormDate));
         $ToDate = date('Y-m-d', strtotime($request->ToDate));
@@ -43,17 +45,17 @@ class ReportController extends Controller
             ->whereDate('created_at', '<=', $ToDate)
             ->with('customer')->get();
 
-        
+
         $data = [
-            'payable'=> $payable,
-            'discount'=>$discount,
-            'total'=> $total,
-            'vat'=> $vat,
-            'list'=>$list,
-            'FormDate'=>$request->FormDate,
-            'ToDate'=>$request->ToDate
+            'payable' => $payable,
+            'discount' => $discount,
+            'total' => $total,
+            'vat' => $vat,
+            'list' => $list,
+            'FormDate' => $request->FormDate,
+            'ToDate' => $request->ToDate
         ];
-        
+
         $pdf = Pdf::loadView('report.SalesReport', $data);
 
         return $pdf->download('invoice.pdf');
